@@ -2,13 +2,18 @@ package Tie::Sysctl;
 
 use base 'Tie::Hash';
 
-our $VERSION = 0.04;
+our $VERSION = 0.05;
 
 sub TIEHASH {
     my $cls = shift;
     my $self = {};
+    if ($^O ne 'linux') { warn "try linux instead:)\n";return }
     $self->{node} = $_[0] || '/';
     $self->{basedir} = '/proc/sys';
+    unless (-d $self->{basedir}) {
+        warn "basedir $self->{basedir} not mounted\n";
+        return;
+    }
     bless $self => $cls;
 }
 
