@@ -2,7 +2,7 @@ package Tie::Sysctl;
 
 use base 'Tie::Hash';
 
-our $VERSION = 0.02;
+our $VERSION = 0.04;
 
 sub TIEHASH {
     my $cls = shift;
